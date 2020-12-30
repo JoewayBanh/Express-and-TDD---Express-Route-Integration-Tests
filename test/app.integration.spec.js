@@ -70,7 +70,7 @@ describe('GET /bookmarks/:id', () => {
 
   it('GET / success case with existing id', (done) => {
     request(app)
-      .get('/bookmarks/:id')
+      .get('/bookmarks/1')
       .expect(200)
       .expect('Content-Type', /json/)
       .then(response => {

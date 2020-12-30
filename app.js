@@ -52,10 +52,15 @@ app.get("/bookmarks/:id", (req, res) => {
         "select * from bookmark where id=?",
         [id],
         (err, results) => {
-            if (!id) {
+            if (results.length == 0) {
                 return res.status(404).json({ error: "Bookmark not found" })
             } else {
-                return  res.status(200).json({id: 1, url: 'https://nodejs.org/', title: 'Node.js' } );
+                if (err) {
+                    res.status(500).send("could not retrieve data")
+                }
+                else {
+                    return res.status(200).json(results[0]);
+                }
             }
         })
 })
